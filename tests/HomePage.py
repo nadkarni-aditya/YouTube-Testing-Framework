@@ -1,10 +1,15 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from BasePage import BasePage
+from Locators import Locators
 
 class HomePage(BasePage):
-    SEARCH_BOX = (By.NAME, "search_query")  # Adjusted to YouTube's actual search bar identifier
-
     def search_video(self, video_name):
-        self.enter_txt(self.SEARCH_BOX, video_name)
-        self.find_element(self.SEARCH_BOX).send_keys(Keys.ENTER)
+        # main locator for search box
+        self.enter_txt(Locators.HOME_SEARCH_BOX, video_name)
+        
+        # send enter key to search box
+        search_box_element = self.find_element(Locators.HOME_SEARCH_BOX)
+        if search_box_element:
+            search_box_element.send_keys(Keys.ENTER)
+        else:
+            print("Search box element not found.")
