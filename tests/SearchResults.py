@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from HomePage import HomePage
+from Config import Config
 
 @pytest.fixture(scope="function")
 def setup():
@@ -12,11 +13,11 @@ def setup():
     # Set up the WebDriver
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.maximize_window()
-    driver.implicitly_wait(10)
-    base_url = "https://www.youtube.com"
+    driver.implicitly_wait(Config.IMPLICIT_WAIT)
+    base_url = Config.BASE_URL
 
     # Yield WebDriver and base URL to the test
-    yield driver, base_url
+    yield driver
 
     # Quit the WebDriver after the test
     driver.quit()
