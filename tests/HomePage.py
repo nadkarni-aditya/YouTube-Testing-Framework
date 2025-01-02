@@ -14,3 +14,4 @@ class HomePage(BasePage):
             search_box_element.send_keys(Keys.ENTER)
         else:
             print("Search box element not found.")
+        return search_box_element.get_attribute("value")
